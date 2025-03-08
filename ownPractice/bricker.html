@@ -1,0 +1,65 @@
+<div id="brick-container"></div>
+<div>
+  🔨 <button onclick="repair()">Repair</button>
+  🧨 <button onclick="destroy()">Destroy</button>
+</div>
+
+<script>
+    // The brick container element where bricks will be appended
+const brickContainer = document.getElementById('brick-container');
+
+// Function to build the tower
+function build(numBricks) {
+  let brickCount = 0;
+  let interval = setInterval(() => {
+    brickCount++;
+    // Create a brick div with a unique id
+    const brick = document.createElement('div');
+    brick.id = `brick-${brickCount}`;
+    
+    // Check if the brick is in the middle column
+    if (brickCount % 3 === 2) { // Middle column (in a 3-column arrangement)
+      brick.setAttribute('data-foundation', 'true');
+    }
+
+    brick.textContent = '🧱'; // Optional: add an emoji to represent the brick
+    brick.style.marginBottom = '5px'; // Space between bricks
+    
+    // Append the brick to the container
+    brickContainer.appendChild(brick);
+
+    // Stop when the specified number of bricks has been built
+    if (brickCount >= numBricks) {
+      clearInterval(interval);
+    }
+  }, 1); // Add a brick every 100ms
+}
+
+// Function to repair the selected bricks
+function repair(...ids) {
+  ids.forEach(id => {
+    const brick = document.getElementById(id);
+    if (brick) {
+      if (brick.hasAttribute('data-foundation')) {
+        // Set the repaired attribute to "in progress" for bricks in the middle column
+        brick.setAttribute('data-repaired', 'in progress');
+      } else {
+        // Set the repaired attribute to "true" for bricks in the other columns
+        brick.setAttribute('data-repaired', 'true');
+      }
+    }
+  });
+}
+
+// Function to destroy the last brick
+function destroy() {
+  const lastBrick = brickContainer.lastElementChild;
+  if (lastBrick) {
+    brickContainer.removeChild(lastBrick);
+  }
+}
+
+// Call build() to create a tower with, for example, 10 bricks
+build(10);
+
+</script>

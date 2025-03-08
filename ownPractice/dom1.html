@@ -1,0 +1,71 @@
+<ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>3rd</li>
+  </ul>
+  
+  <script>
+    const listItems = document.getElementsByTagName('li');
+    console.log(listItems); // Logs all <li> elements in an HTMLCollection
+  </script>
+  <!---->
+
+  <div class="box">Box 1</div>
+<div class="box">Box 2</div>
+
+<script>
+  const boxes = document.getElementsByClassName('box');
+  console.log(boxes); // Logs both div elements with class "box"
+</script>
+<!---->
+
+<p id="intro">This is an intro paragraph.</p>
+
+<script>
+  const intro = document.getElementById('intro');
+  console.log(intro); // Logs the <p> element with id "intro"
+</script>
+<!---->
+
+<div class="container">
+    <p class="text">First paragraph</p>
+    <p class="text">Second paragraph</p>
+  </div>
+  
+  <script>
+    const firstParagraph = document.querySelector('.text');
+    console.log(firstParagraph); // Logs the first <p> with class "text"
+  </script>
+  <!---->
+
+  <script>
+    const allParagraphs = document.querySelectorAll('.text');
+    allParagraphs.forEach((p) => console.log(p)); // Logs both <p> elements with class "text"
+  </script>
+  <!---->
+
+  <style>
+    button:not(.primary) {
+      background-color: gray;
+    }
+  </style>
+  
+  <button class="primary">Primary</button>
+  <button>Secondary</button>
+  <button>Secondary</button>
+  <!---->
+
+  <style>
+    li:not(:first-child) {
+      color: red;
+    }
+  </style>
+  
+  <ul>
+    <li>First Item</li>
+    <li>Second Item</li>
+    <li>Third Item</li>
+  </ul>
+  <!---->
+
+  <p>This is a <span style="color: red;">highlighted</span> word.</p>
