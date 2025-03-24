@@ -14,3 +14,7 @@ delay: The number of milliseconds between each execution. (1 second = 1000 milli
 This tool will be the movement
 
 element.innerHTML += "Hello" + '<br>'
+
+parseInt will ignore the string part
+
+window.innerWidth, window.innerHeight
