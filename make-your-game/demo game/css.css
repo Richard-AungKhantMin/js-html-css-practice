@@ -18,7 +18,7 @@ body {
     position: absolute;
     width: 80px;
     height: 80px;
-    background-image: url('cat.png'); /* Duck Image */
+    background-image: url('cat.png'); 
     background-size: cover;
     transition: transform 0.2s ease-in-out;
     cursor: pointer;
@@ -50,4 +50,13 @@ body {
     top: 630px; /* Place it just below the pause button */
     color: white;
     font-size: 20px;
+}
+
+#bonk{
+    position: absolute;
+    height: 120px;
+    width: 120px;
+    background-image: url('bat.png');
+    background-size: cover;
+    z-index: 10;
 }

@@ -1,9 +1,31 @@
 const gameBox = document.getElementById("gBox")
 const timeHTML = document.getElementById("time")
+const bat = document.getElementById("bonk")
 let isPaused = false
 let time = 0
 let reqAnimation = null
 let speed = 3
+
+function bonk(){
+    let x = (gameBox.clientWidth - bat.clientWidth) / 2
+    let y = (gameBox.clientHeight - bat.clientHeight) / 2
+    
+    bat.style.left = `${x}px`
+    bat.style.top = `${y}px`
+    let bonkSpeed = 50
+
+    document.addEventListener("keydown", (e)=>{
+        if (e.key === "ArrowRight" && x < gameBox.clientWidth) x += bonkSpeed;
+    if (e.key === "ArrowLeft" && x > 0) x -= bonkSpeed;
+    if (e.key === "ArrowDown" && y < gameBox.clientHeight) y += bonkSpeed;
+    if (e.key === "ArrowUp" && y > 0) y -= bonkSpeed;
+
+     bat.style.left = `${x}px`
+    bat.style.top = `${y}px`
+    })
+
+   
+}
 
 function manageTime(){
     const timerID = setInterval(()=>{
@@ -11,11 +33,7 @@ function manageTime(){
             time++
         }
         
-        speed = Math.random()*10
         timeHTML.innerHTML = `Time: ${time}s`
-        if (time%5===0){
-            speed = speed + Math.random()*30
-        }
     }, 1000)
 }
 
@@ -90,9 +108,11 @@ function moveCats() {
 }
 
 function main(){
+    bonk()
     setInterval(() => {
         if (!isPaused) createCat();
-    }, 2000);
+
+    }, 3000);
     pause()
     manageTime()
     reqAnimation = requestAnimationFrame(moveCats)

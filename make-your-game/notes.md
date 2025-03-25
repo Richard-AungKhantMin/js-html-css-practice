@@ -1,3 +1,17 @@
+Things to do next:
+
+add reqAnimationFrame for the bat
+fix the hidden tab, many tabs problem
+add the bonking feature
+change the cat pic when bonked
+add music
+add sound effects
+add restart button
+generating amount and speed for difficulty
+
+
+---
+
 For this case:
 let topPos = Math.random() * (window.innerHeight - 50);
 0 ≤ topPos < (window.innerHeight - 50)
@@ -18,3 +32,4 @@ element.innerHTML += "Hello" + '<br>'
 parseInt will ignore the string part
 
 window.innerWidth, window.innerHeight
+
