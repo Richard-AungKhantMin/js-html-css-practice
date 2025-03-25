@@ -7,7 +7,10 @@ let speed = 3
 
 function manageTime(){
     const timerID = setInterval(()=>{
-        time++
+        if (!isPaused){
+            time++
+        }
+        
         speed = Math.random()*10
         timeHTML.innerHTML = `Time: ${time}s`
         if (time%5===0){
