@@ -22,10 +22,15 @@ function createCat() {
     cat.style.left = "0px"; 
 
     // Click to "shoot" the duck
-    cat.addEventListener("click", () => {
-        cat.style.transform = "rotate(90deg)"; 
-        setTimeout(() => cat.remove(), 500);
-    });
+   
+        cat.addEventListener("click", () => {
+            if (!isPaused){
+            cat.style.transform = "rotate(90deg)"; 
+            setTimeout(() => cat.remove(), 500);
+            }
+        });
+    
+   
 }
 
 function moveCats() {
