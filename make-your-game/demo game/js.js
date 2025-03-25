@@ -1,14 +1,33 @@
 const gameBox = document.getElementById("gBox")
 let isPaused = false
+let timer = 60
+let reqAnimation = null
 
-pauseButton = document.getElementById("pause")
-pauseButton.addEventListener("click", () => {
-    isPaused = !isPaused;
-    pauseButton.textContent = isPaused ? "Resume" : "Pause";
-    if (!isPaused) {
-        requestAnimationFrame(moveCats);
-    }
-});
+function pause(){
+    const pauseButton = document.getElementById("pause")
+    pauseButton.addEventListener("click", () => {
+        isPaused = !isPaused;
+        pauseButton.textContent = isPaused ? "Resume" : "Pause";
+        if (isPaused) {
+            cancelAnimationFrame(reqAnimation);
+        }else{
+            reqAnimation = requestAnimationFrame(moveCats)
+        }
+    });
+
+    document.addEventListener("visibilitychange", () =>{
+        if (document.hidden){
+            console.log("Game paused")
+            isPaused = true
+            cancelAnimationFrame(reqAnimation)
+        }else{
+            console.log("Game not paused")
+            isPaused = false
+            reqAnimation = requestAnimationFrame(moveCats)
+        }
+    })
+}
+
 
 function createCat() {
     const cat = document.createElement("div");
@@ -50,16 +69,18 @@ function moveCats() {
     }})
     
     if (!isPaused) {
-        requestAnimationFrame(moveCats);
+       reqAnimation = requestAnimationFrame(moveCats);
+    }else{
+        cancelAnimationFrame(reqAnimation)
     }
 }
 
 function main(){
     setInterval(() => {
         if (!isPaused) createCat();
-    }, 2000);
-
-    requestAnimationFrame(moveCats)
+    }, 5000);
+    pause()
+    reqAnimation = requestAnimationFrame(moveCats)
 }
 
 main()

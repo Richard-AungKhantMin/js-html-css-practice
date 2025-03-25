@@ -27,8 +27,9 @@ body {
 
 #pause {
     position: absolute;
-    left: 480px;
+    left: 50%;
     top: 580px;
+    transform: translateX(-50%);
     padding: 10px 20px;
     font-size: 18px;
     background-color: #4CAF50;
@@ -40,4 +41,13 @@ body {
 
 #pause:hover {
     background-color: #45a049;
+}
+
+#timer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 630px; /* Place it just below the pause button */
+    color: white;
+    font-size: 20px;
 }
