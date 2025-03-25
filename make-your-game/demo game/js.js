@@ -1,7 +1,20 @@
 const gameBox = document.getElementById("gBox")
+const timeHTML = document.getElementById("time")
 let isPaused = false
-let timer = 60
+let time = 0
 let reqAnimation = null
+let speed = 3
+
+function manageTime(){
+    const timerID = setInterval(()=>{
+        time++
+        speed = Math.random()*10
+        timeHTML.innerHTML = `Time: ${time}s`
+        if (time%5===0){
+            speed = speed + Math.random()*30
+        }
+    }, 1000)
+}
 
 function pause(){
     const pauseButton = document.getElementById("pause")
@@ -17,11 +30,9 @@ function pause(){
 
     document.addEventListener("visibilitychange", () =>{
         if (document.hidden){
-            console.log("Game paused")
             isPaused = true
             cancelAnimationFrame(reqAnimation)
         }else{
-            console.log("Game not paused")
             isPaused = false
             reqAnimation = requestAnimationFrame(moveCats)
         }
@@ -62,7 +73,7 @@ function moveCats() {
 
     if (!isPaused){
         if (currentLeft < maxRight) {
-            cat.style.left = `${currentLeft + 3}px`;
+            cat.style.left = `${currentLeft + speed}px`;
         } else {
             cat.remove();
         }
@@ -78,8 +89,9 @@ function moveCats() {
 function main(){
     setInterval(() => {
         if (!isPaused) createCat();
-    }, 5000);
+    }, 2000);
     pause()
+    manageTime()
     reqAnimation = requestAnimationFrame(moveCats)
 }
 
