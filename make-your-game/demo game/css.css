@@ -33,10 +33,10 @@ body {
     font-size: 20px;
 }
 
-#bonk{
+#bat{
     position: absolute;
-    height: 80px;
-    width: 80px;
+    height: 120px;
+    width: 120px;
     display: block;
     background-image: url('bat.png');
     background-size: cover;
@@ -100,4 +100,45 @@ body {
         opacity: 1;
         transform: translate(-50%, -50%);
     }
+}
+
+#startSection {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0);
+    color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    z-index: 11;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+#startButton {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+#startButton:hover {
+    background: #218838;
+}
+
+#instructions {
+    font-size: 18px;
+    color: #ddd;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    text-align: center;
+    max-width: 400px; 
 }

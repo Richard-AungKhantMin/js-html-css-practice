@@ -1,9 +1,16 @@
 const gameBox = document.getElementById("gBox")
+const startBox = document.getElementById("startSection")
 const timeHTML = document.getElementById("time")
-const bat = document.getElementById("bonk")
+const bat = document.getElementById("bat")
 const pauseSection = document.getElementById("pauseSection");
 const resume = document.getElementById("resume");
 const restart = document.getElementById("restart");
+const bananaAudio = document.getElementById("banana");
+const bonkAudio = document.getElementById("bonk");
+const gameOverAudio = document.getElementById("gameOver");
+const tomScreamAudio = document.getElementById("tomScream");
+const happiAudio = document.getElementById("happi")
+let catInterval
 let isPaused = false
 let time = 0
 let reqAnimation = null
@@ -32,6 +39,7 @@ function checkHit(){
             batInfo.top < catInfo.bottom &&
             batInfo.bottom > catInfo.top
         ) {
+            tomScreamAudio.play()
             cat.dispatchEvent(new Event("hit"));
         }
     });
@@ -53,14 +61,8 @@ function checkHit(){
 
 } 
 
-function moveBat() {
-        bat.style.left = `${x}px`;
-        bat.style.top = `${y}px`;
-       reqBat = requestAnimationFrame(moveBat); 
-    
-}
 
-function bonk(){
+function controlBat(){
 
     document.addEventListener("keydown", (e)=>{
         if (e.key.toLowerCase() === "d" && x < gameBox.clientWidth-bat.clientWidth) x += bonkSpeed;
@@ -68,10 +70,39 @@ function bonk(){
     if (e.key.toLowerCase() === "s" && y < gameBox.clientHeight-(bat.clientHeight/2)) y += bonkSpeed;
     if (e.key.toLowerCase() === "w" && y > 0) y -= bonkSpeed;
 
-        reqBat = requestAnimationFrame(moveBat)
-     
+  const batMove = setInterval(() =>{
+    let BatX = parseInt(bat.style.left);
+    let BatY = parseInt(bat.style.top)
+    const dx = x - BatX;
+    const dy = y - BatY;
 
+    const frameSpeed = 1
+
+    if (BatX > x){
+        BatX -= frameSpeed
+    }
+
+    if (BatX < x) {
+        BatX += frameSpeed
+    }
+
+    if (BatY > y){
+        BatY -= frameSpeed
+       
+    }
+    
+    if (BatY < y){
+        BatY += frameSpeed
+    }
+
+    bat.style.top = `${BatY}px`;
+    bat.style.left = `${BatX}px`; 
+
+  }, 1)
+        
     if (e.key === "Enter") {
+        bonkAudio.pause()
+        bonkAudio.play()
         checkHit();
         bat.style.transition = "transform 0.1s ease";
                 bat.style.transform = "rotate(-45deg)";
@@ -87,9 +118,9 @@ function manageTime(){
         if (!isPaused){
             time++
         }
-        if (time%5 === 0){
+       /*  if (time%5 === 0){
             speed++
-        }
+        } */
         timeHTML.innerHTML = `Time: ${time}s`
     }, 1000)
 }
@@ -113,7 +144,7 @@ function pause(){
     })
 
     document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
+        if (event.key === "Escape" || event.key === " ") {
             if (pauseSection.style.display === "block") {
                 reqAnimation = requestAnimationFrame(moveCats);
                 pauseSection.style.display = "none";
@@ -172,7 +203,13 @@ function moveCats() {
         if (currentLeft < maxRight) {
             cat.style.left = `${currentLeft + speed}px`;
         } else {
-            cat.remove();
+            cat.style.backgroundImage = `url(gameOver.png)`;
+            cat.style.height="100px"
+             cat.style.width="100px"
+            gameOverAudio.play() 
+            setTimeout(() => {
+                cat.remove();
+            }, 3000); 
         }
     }})
     
@@ -183,14 +220,27 @@ function moveCats() {
     }
 }
 
-function main(){
-    bonk()
-    setInterval(() => {
-        if (!isPaused) createCat();
 
-    }, 3000);
-    pause()
-    manageTime()
+function main(){
+    
+    controlBat()
+
+    startBox.addEventListener("click", function () {
+        setInterval(() =>{
+            isPaused ? happiAudio.pause():happiAudio.play()
+        }, 10)
+        happiAudio.play()
+        document.getElementById("startSection").style.display = "none";
+
+        clearInterval(catInterval);
+        catInterval = setInterval(() => {
+            if (!isPaused) createCat();
+    
+        }, 3000);
+        manageTime()
+        pause()
+    });
+    
     reqAnimation = requestAnimationFrame(moveCats)
 }
 
