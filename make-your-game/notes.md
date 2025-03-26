@@ -1,12 +1,18 @@
 Things to do next:
 
-add reqAnimationFrame for the bat
-fix the hidden tab, many tabs problem
-add the bonking feature
-change the cat pic when bonked
+
 add music
 add sound effects
+-bonk
+-cat's bonked sound
+-losing life sound
+-game over sound
+-background music
+
 add restart button
+add scoring
+add lives
+change to setintervals for the bat for smoother fps
 generating amount and speed for difficulty
 
 
