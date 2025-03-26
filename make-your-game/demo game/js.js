@@ -9,6 +9,8 @@ let time = 0
 let reqAnimation = null
 let reqBat = null
 let speed = 3
+let score = 0
+let lives = 5
 
 let x = (gameBox.clientWidth - bat.clientWidth) / 2
 let y = (gameBox.clientHeight - bat.clientHeight) / 2
