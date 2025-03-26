@@ -15,7 +15,7 @@ let y = (gameBox.clientHeight - bat.clientHeight) / 2
 
 bat.style.left = `${x}px`
 bat.style.top = `${y}px`
-let bonkSpeed = 5
+let bonkSpeed = 50
  
 function checkHit(){
 
@@ -61,15 +61,15 @@ function moveBat() {
 function bonk(){
 
     document.addEventListener("keydown", (e)=>{
-        if (e.key === "ArrowRight" && x < gameBox.clientWidth-bat.clientWidth) x += bonkSpeed;
-    if (e.key === "ArrowLeft" && x > 0) x -= bonkSpeed;
-    if (e.key === "ArrowDown" && y < gameBox.clientHeight-(bat.clientHeight/2)) y += bonkSpeed;
-    if (e.key === "ArrowUp" && y > 0) y -= bonkSpeed;
+        if (e.key.toLowerCase() === "d" && x < gameBox.clientWidth-bat.clientWidth) x += bonkSpeed;
+    if (e.key.toLowerCase() === "a" && x > 0) x -= bonkSpeed;
+    if (e.key.toLowerCase() === "s" && y < gameBox.clientHeight-(bat.clientHeight/2)) y += bonkSpeed;
+    if (e.key.toLowerCase() === "w" && y > 0) y -= bonkSpeed;
 
         reqBat = requestAnimationFrame(moveBat)
      
 
-    if (e.key === " ") {
+    if (e.key === "Enter") {
         checkHit();
         bat.style.transition = "transform 0.1s ease";
                 bat.style.transform = "rotate(-45deg)";
